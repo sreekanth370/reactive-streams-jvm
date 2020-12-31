@@ -22,9 +22,12 @@ matrix:
     - jdk: oraclejdk8 # JDK 1.8.0_131-b11
     - jdk: oraclejdk9
 # before install run ppcjobs:
-- arch: ppc64le
-- jdk: oraclejdk8 # JDK 1.8.0_131-b11
-- arch: ppc64le
+include:
+# JDK 7 no longer supported by Gradle 6+
+#    - jdk: openjdk7
+    - arch: ppc64le
+    - jdk: oraclejdk8 # JDK 1.8.0_131-b11
+    - arch: ppc64le
     - jdk: oraclejdk9
 
 # Don't let Travis CI execute './gradlew assemble' by default
