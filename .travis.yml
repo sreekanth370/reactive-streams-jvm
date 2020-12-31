@@ -1,4 +1,7 @@
 language: java
+arch:
+  - amd64
+  - ppc64le
 sudo: required
 dist: trusty
 #group: edge
@@ -16,13 +19,21 @@ matrix:
   include:
 # JDK 7 no longer supported by Gradle 6+
 #    - jdk: openjdk7
-    - arch:
-       - amd64
-       - ppc64le
     - jdk: oraclejdk8 # JDK 1.8.0_131-b11
-    - arch: 
-       - amd64
-       - ppc64le
+    - jdk: oraclejdk9
+# Don't let Travis CI execute './gradlew assemble' by default
+# From https://github.com/reactive-streams/reactive-streams-jvm/pull/383
+install:
+# Display Gradle, JVM and other versions
+  - ./gradlew -version
+# before install
+jobs:
+ exclude:
+# JDK 7 no longer supported by Gradle 6+
+#    - jdk: openjdk7
+    - arch: ppc64le
+    - jdk: oraclejdk8 # JDK 1.8.0_131-b11
+    - arch: ppc64le
     - jdk: oraclejdk9
 
 # Don't let Travis CI execute './gradlew assemble' by default
